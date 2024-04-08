@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import Observation
 
 struct ContentView: View {
+    @State private var sharedActivities = SharedActivities()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image(systemName: "scalemass.fill")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("LiftLog")
+            Text("Workout: \(sharedActivities.sharedActivities[0].activity)")
         }
         .padding()
     }
@@ -21,4 +25,14 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct Activity: Identifiable {
+    let id = UUID()
+    let activity: String
+}
+
+@Observable
+class SharedActivities {
+    var sharedActivities = [Activity(activity: "Pull Ups")]
 }
