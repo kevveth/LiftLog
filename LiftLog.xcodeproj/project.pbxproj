@@ -11,6 +11,7 @@
 		6C08049C2BC26E0F0025D533 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08049B2BC26E0F0025D533 /* ContentView.swift */; };
 		6C08049E2BC26E120025D533 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C08049D2BC26E120025D533 /* Assets.xcassets */; };
 		6C0804A22BC26E120025D533 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C0804A12BC26E120025D533 /* Preview Assets.xcassets */; };
+		6C0804A92BC3B7000025D533 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0804A82BC3B7000025D533 /* AddView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		6C08049D2BC26E120025D533 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C08049F2BC26E120025D533 /* LiftLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiftLog.entitlements; sourceTree = "<group>"; };
 		6C0804A12BC26E120025D533 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6C0804A82BC3B7000025D533 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				6C0804992BC26E0F0025D533 /* LiftLogApp.swift */,
 				6C08049B2BC26E0F0025D533 /* ContentView.swift */,
+				6C0804A82BC3B7000025D533 /* AddView.swift */,
 				6C08049D2BC26E120025D533 /* Assets.xcassets */,
 				6C08049F2BC26E120025D533 /* LiftLog.entitlements */,
 				6C0804A02BC26E120025D533 /* Preview Content */,
@@ -141,6 +144,7 @@
 			files = (
 				6C08049C2BC26E0F0025D533 /* ContentView.swift in Sources */,
 				6C08049A2BC26E0F0025D533 /* LiftLogApp.swift in Sources */,
+				6C0804A92BC3B7000025D533 /* AddView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
