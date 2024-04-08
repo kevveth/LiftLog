@@ -10,29 +10,52 @@ import Observation
 
 struct ContentView: View {
     @State private var sharedActivities = SharedActivities()
+    @State private var showingAddActivity = false
+    
+    let examples = [
+        Activity(name: "Pull Ups"),
+        Activity(name: "Squats"),
+        Activity(name: "Bench Press")
+    ]
     
     var body: some View {
-        VStack {
-            Image(systemName: "scalemass.fill")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("LiftLog")
-            Text("Workout: \(sharedActivities.sharedActivities[0].activity)")
+        NavigationStack {
+            List {
+                ForEach(sharedActivities.activities) { activity in
+                    NavigationLink(value: activity){
+                        Text(activity.name)
+                    }
+                    .navigationDestination(for: Activity.self) { activity in
+                        Text("Detal View")
+                    }
+                }
+            }
+            .navigationTitle("LiftLog 🪵")
+            .toolbar {
+                Button("Add Activity") {
+                    showingAddActivity.toggle()
+                }
+            }
+            .sheet(isPresented: $showingAddActivity) {
+                AddView(sharedActivities: sharedActivities)
+            }
         }
-        .padding()
     }
+    
+    
 }
 
 #Preview {
     ContentView()
 }
 
-struct Activity: Identifiable {
+struct Activity: Identifiable, Hashable {
     let id = UUID()
-    let activity: String
+    let name: String
+    var notes: String = ""
 }
 
 @Observable
 class SharedActivities {
-    var sharedActivities = [Activity(activity: "Pull Ups")]
+    var activities = [Activity(name: "Pull Ups")]
 }
