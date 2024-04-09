@@ -9,26 +9,25 @@ import SwiftUI
 import Observation
 
 struct ContentView: View {
-    @State private var sharedActivities = SharedActivities()
+    @State private var sharedActivities = SharedActivities(activities: [
+        Activity(name: "Pull Ups", notes: "Did 10"),
+        Activity(name: "Squats", frequency: 7),
+        Activity(name: "Bench Press")
+      ])
+    
     @State private var showingAddActivity = false
     
-    let examples = [
-        Activity(name: "Pull Ups"),
-        Activity(name: "Squats"),
-        Activity(name: "Bench Press")
-    ]
-    
     var body: some View {
-        NavigationStack {
+        NavigationStack() {
             List {
                 ForEach(sharedActivities.activities) { activity in
                     NavigationLink(value: activity){
                         Text(activity.name)
                     }
-                    .navigationDestination(for: Activity.self) { activity in
-                        Text("Detal View")
-                    }
                 }
+            }
+            .navigationDestination(for: Activity.self) { activity in
+                DetailView(activity: activity, sharedActivities: sharedActivities)
             }
             .navigationTitle("LiftLog 🪵")
             .toolbar {
@@ -49,13 +48,18 @@ struct ContentView: View {
     ContentView()
 }
 
-struct Activity: Identifiable, Hashable {
+struct Activity: Equatable, Hashable, Identifiable {
     let id = UUID()
     let name: String
+    var frequency: Int = 1
     var notes: String = ""
 }
 
 @Observable
-class SharedActivities {
-    var activities = [Activity(name: "Pull Ups")]
+class SharedActivities: Identifiable {
+    var activities: [Activity]
+    
+    init(activities: [Activity] = [Activity]()) {
+        self.activities = activities
+    }
 }
