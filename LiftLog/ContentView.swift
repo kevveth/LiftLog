@@ -11,11 +11,12 @@ import Observation
 struct ContentView: View {
     @State private var sharedActivities = SharedActivities(activities: [
         Activity(name: "Pull Ups", notes: "Did 10"),
-        Activity(name: "Squats", frequency: 7),
+        Activity(name: "Squats", completionCount: 7),
         Activity(name: "Bench Press")
       ])
     
     @State private var showingAddActivity = false
+    @State private var selectedActivity: Activity? = nil
     
     var body: some View {
         NavigationStack() {
@@ -51,7 +52,7 @@ struct ContentView: View {
 struct Activity: Equatable, Hashable, Identifiable {
     let id = UUID()
     let name: String
-    var frequency: Int = 1
+    var completionCount: Int = 1
     var notes: String = ""
 }
 

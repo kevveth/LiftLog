@@ -17,29 +17,29 @@ struct DetailView: View {
     var increment: () -> Void {
         return {
             var copy = activity
-            copy.frequency += 1
+            copy.completionCount += 1
             
             sharedActivities.activities[index] = copy
             
-            activity.frequency += 1
+            activity.completionCount += 1
         }
     }
     
     var decrement: () -> Void {
         return {
             var copy = activity
-            copy.frequency -= 1
+            copy.completionCount -= 1
             
             sharedActivities.activities[index] = copy
             
-            activity.frequency -= 1
+            activity.completionCount -= 1
         }
     }
     
     var body: some View {
         Form {
             Section("Frequency") {
-                Stepper("\(activity.frequency)", onIncrement: increment, onDecrement: decrement)
+                Stepper("\(activity.completionCount)", onIncrement: increment, onDecrement: decrement)
                 
                 if activity.notes != "" {
                     Section("Notes"){
