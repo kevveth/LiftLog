@@ -58,7 +58,7 @@ struct Activity: Equatable, Hashable, Identifiable {
 
 @Observable
 class SharedActivities: Identifiable {
-    var activities: [Activity]
+    var activities = [Activity]()
     
     init(activities: [Activity] = [Activity]()) {
         self.activities = activities

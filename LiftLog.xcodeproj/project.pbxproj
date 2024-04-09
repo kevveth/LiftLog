@@ -40,7 +40,6 @@
 		6C08048D2BC26E0F0025D533 = {
 			isa = PBXGroup;
 			children = (
-				6C8E519C2BC3D22100CA1553 /* DetailView.swift */,
 				6C0804982BC26E0F0025D533 /* LiftLog */,
 				6C0804972BC26E0F0025D533 /* Products */,
 			);
@@ -59,6 +58,7 @@
 			children = (
 				6C0804992BC26E0F0025D533 /* LiftLogApp.swift */,
 				6C08049B2BC26E0F0025D533 /* ContentView.swift */,
+				6C8E519C2BC3D22100CA1553 /* DetailView.swift */,
 				6C0804A82BC3B7000025D533 /* AddView.swift */,
 				6C08049D2BC26E120025D533 /* Assets.xcassets */,
 				6C08049F2BC26E120025D533 /* LiftLog.entitlements */,

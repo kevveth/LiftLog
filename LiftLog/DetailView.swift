@@ -11,7 +11,8 @@ struct DetailView: View {
     @State var activity: Activity
     var sharedActivities: SharedActivities
     var index: Int {
-        sharedActivities.activities.firstIndex(of: activity) ?? 0
+        // If an activity is clicked, there should always be an index
+        sharedActivities.activities.firstIndex(of: activity)!
     }
     
     var increment: () -> Void {
