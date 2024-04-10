@@ -8,24 +8,16 @@
 import SwiftUI
 
 struct DetailView: View {
-    private var activity: Activity
+    var activity: Activity
     @Bindable var sharedActivities: SharedActivities
+    @Binding var path: NavigationPath
     
-    private var index: Int
-    
-    init(activity: Activity, sharedActivities: SharedActivities) {
-        self.activity = activity
-        self.sharedActivities = sharedActivities
-        
-        if let index = sharedActivities.activities.firstIndex(where: { $0.id == activity.id }) {
-            self.index = index
-        } else {
-            // Handle the case where activity is not found
+    var index: Int {
+        guard let index = sharedActivities.activities.firstIndex(where: { $0.id == activity.id }) else {
             fatalError("Missing Index")
         }
+        return index
     }
-    
-    
     
     var body: some View {
         Form {
@@ -47,9 +39,7 @@ struct DetailView: View {
     }
 }
 
-#Preview {
-//    let activity = Activity(name: "Pull Ups", notes: "Did 10")
-    let activities = SharedActivities()
-    
-    return DetailView(activity: activities.activities[0], sharedActivities: activities)
-}
+//#Preview {
+//    let activities = SharedActivities()
+//    return DetailView(activity: activities.activities[0], sharedActivities: activities, path: pathStore.path)
+//}
