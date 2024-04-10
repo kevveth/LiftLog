@@ -16,7 +16,6 @@ struct ContentView: View {
       ])
     
     @State private var showingAddActivity = false
-    @State private var selectedActivity: Activity? = nil
     
     var body: some View {
         NavigationStack() {
@@ -51,7 +50,7 @@ struct ContentView: View {
 
 struct Activity: Equatable, Hashable, Identifiable {
     let id = UUID()
-    let name: String
+    var name: String
     var completionCount: Int = 1
     var notes: String = ""
 }

@@ -8,49 +8,45 @@
 import SwiftUI
 
 struct DetailView: View {
-    @State var activity: Activity
-    var sharedActivities: SharedActivities
-    var index: Int {
-        // If an activity is clicked, there should always be an index
-        sharedActivities.activities.firstIndex(of: activity)!
-    }
+    private var activity: Activity
+    @Bindable var sharedActivities: SharedActivities
     
-    var increment: () -> Void {
-        return {
-            var copy = activity
-            copy.completionCount += 1
-            
-            sharedActivities.activities[index] = copy
-            
-            activity.completionCount += 1
+    private var index: Int
+    
+    init(activity: Activity, sharedActivities: SharedActivities) {
+        self.activity = activity
+        self.sharedActivities = sharedActivities
+        
+        if let index = sharedActivities.activities.firstIndex(where: { $0.id == activity.id }) {
+            self.index = index
+        } else {
+            // Handle the case where activity is not found
+            fatalError("Missing Index")
         }
     }
     
-    var decrement: () -> Void {
-        return {
-            var copy = activity
-            copy.completionCount -= 1
-            
-            sharedActivities.activities[index] = copy
-            
-            activity.completionCount -= 1
-        }
-    }
+    
     
     var body: some View {
         Form {
             Section("Frequency") {
-                Stepper("\(activity.completionCount)", onIncrement: increment, onDecrement: decrement)
+                Stepper("\(sharedActivities.activities[index].completionCount)", value: $sharedActivities.activities[index].completionCount)
                 
-                if activity.notes != "" {
-                    Section("Notes"){
-                        Text(activity.notes)
-                    }
-                }
+            }
+            
+            
+            Section("Notes"){
+                TextField("Notes", text: $sharedActivities.activities[index].notes)
+            }
+            
+            
+            Button("Print Activity") {
+                print("\(sharedActivities.activities[index])")
             }
         }
-        .navigationTitle(activity.name)
+        .navigationTitle($sharedActivities.activities[index].name)
         .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
