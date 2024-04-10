@@ -31,14 +31,11 @@ struct DetailView: View {
         Form {
             Section("Frequency") {
                 Stepper("\(sharedActivities.activities[index].completionCount)", value: $sharedActivities.activities[index].completionCount)
-                
             }
-            
             
             Section("Notes"){
                 TextField("Notes", text: $sharedActivities.activities[index].notes)
             }
-            
             
             Button("Print Activity") {
                 print("\(sharedActivities.activities[index])")
@@ -51,8 +48,8 @@ struct DetailView: View {
 }
 
 #Preview {
-    let activity = Activity(name: "Pull Ups", notes: "Did 10")
-    let activities = SharedActivities(activities: [activity])
+//    let activity = Activity(name: "Pull Ups", notes: "Did 10")
+    let activities = SharedActivities()
     
-    return DetailView(activity: activity, sharedActivities: activities)
+    return DetailView(activity: activities.activities[0], sharedActivities: activities)
 }

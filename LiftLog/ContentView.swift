@@ -9,11 +9,7 @@ import SwiftUI
 import Observation
 
 struct ContentView: View {
-    @State private var sharedActivities = SharedActivities(activities: [
-        Activity(name: "Pull Ups", notes: "Did 10"),
-        Activity(name: "Squats", completionCount: 7),
-        Activity(name: "Bench Press")
-      ])
+    @State private var sharedActivities = SharedActivities()
     
     @State private var showingAddActivity = false
     
@@ -31,8 +27,11 @@ struct ContentView: View {
             }
             .navigationTitle("LiftLog 🪵")
             .toolbar {
-                Button("Add Activity") {
+                Button {
                     showingAddActivity.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .bold()
                 }
             }
             .sheet(isPresented: $showingAddActivity) {
@@ -48,8 +47,8 @@ struct ContentView: View {
     ContentView()
 }
 
-struct Activity: Equatable, Hashable, Identifiable {
-    let id = UUID()
+struct Activity: Codable, Equatable, Hashable, Identifiable {
+    var id = UUID()
     var name: String
     var completionCount: Int = 1
     var notes: String = ""
@@ -57,7 +56,22 @@ struct Activity: Equatable, Hashable, Identifiable {
 
 @Observable
 class SharedActivities: Identifiable {
-    var activities = [Activity]()
+    var activities = [Activity]() {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(activities) {
+                UserDefaults.standard.set(encoded, forKey: "SharedActivities")
+            }
+        }
+    }
+    
+    init() {
+        if let savedActivities = UserDefaults.standard.data(forKey: "SharedActivities") {
+            if let decodedActivities = try? JSONDecoder().decode([Activity].self, from: savedActivities) {
+                activities = decodedActivities
+                return
+            }
+        } 
+    }
     
     init(activities: [Activity] = [Activity]()) {
         self.activities = activities
