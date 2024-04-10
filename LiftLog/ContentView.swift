@@ -10,11 +10,11 @@ import Observation
 
 struct ContentView: View {
     @State private var sharedActivities = SharedActivities()
-    
+    @State private var pathStore = PathStore()
     @State private var showingAddActivity = false
     
     var body: some View {
-        NavigationStack() {
+        NavigationStack(path: $pathStore.path) {
             List {
                 ForEach(sharedActivities.activities) { activity in
                     NavigationLink(value: activity){
@@ -34,9 +34,9 @@ struct ContentView: View {
                         .bold()
                 }
             }
-            .sheet(isPresented: $showingAddActivity) {
-                AddView(sharedActivities: sharedActivities)
-            }
+        }
+        .sheet(isPresented: $showingAddActivity) {
+            AddView(sharedActivities: sharedActivities)
         }
     }
     

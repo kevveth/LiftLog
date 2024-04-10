@@ -20,7 +20,6 @@ class PathStore {
     private let savePath = URL.documentsDirectory.appending(path: "SavedPath")
     
     init() {
-        // Retrieve data from save path
         if let data = try? Data(contentsOf: savePath) {
             if let decoded = try? JSONDecoder().decode(NavigationPath.CodableRepresentation.self, from: data) {
                 path = NavigationPath(decoded)
@@ -28,11 +27,10 @@ class PathStore {
             }
         }
         
-        // If still here, start with an empty path
+        // Still here? Start with an empty path.
         path = NavigationPath()
     }
     
-    // Save nav data to save path
     func save() {
         guard let representation = path.codable else { return }
         
