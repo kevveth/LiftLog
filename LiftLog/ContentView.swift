@@ -21,6 +21,7 @@ struct ContentView: View {
                         Text(activity.name)
                     }
                 }
+                .onDelete(perform: removeActivities)
             }
             .navigationDestination(for: Activity.self) { activity in
                 DetailView(activity: activity, sharedActivities: sharedActivities, path: $pathStore.path)
@@ -31,7 +32,7 @@ struct ContentView: View {
                     showingAddActivity.toggle()
                 } label: {
                     Image(systemName: "plus")
-                        .bold()
+//                        .bold()
                 }
             }
         }
@@ -40,6 +41,13 @@ struct ContentView: View {
         }
     }
     
+    func removeActivities(at offsets: IndexSet) {
+        for offset in offsets {
+            let activity = sharedActivities.activities[offset]
+            
+            sharedActivities.activities.removeAll(where: { $0.id == activity.id })
+        }
+    }
     
 }
 

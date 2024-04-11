@@ -21,7 +21,7 @@ struct DetailView: View {
     
     var body: some View {
         Form {
-            Section("Frequency") {
+            Section("Completion Count") {
                 Stepper("\(sharedActivities.activities[index].completionCount)", value: $sharedActivities.activities[index].completionCount)
             }
             
@@ -35,7 +35,16 @@ struct DetailView: View {
         }
         .navigationTitle($sharedActivities.activities[index].name)
         .navigationBarTitleDisplayMode(.inline)
-        
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    path = NavigationPath()
+                } label: {
+                    Image(systemName: "house")
+                    
+                }
+            }
+        }
     }
 }
 
