@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     var activity: Activity
     @Bindable var sharedActivities: SharedActivities
-//    @Binding var path: NavigationPath
+    @Binding var path: NavigationPath
     
     var index: Int {
         guard let index = sharedActivities.activities.firstIndex(where: { $0.id == activity.id }) else {
@@ -39,7 +39,7 @@ struct DetailView: View {
     }
 }
 
-//#Preview {
-//    let activities = SharedActivities()
-//    return DetailView(activity: activities.activities[0], sharedActivities: activities, path: pathStore.path)
-//}
+#Preview {
+    let activities = SharedActivities()
+    return DetailView(activity: activities.activities[0], sharedActivities: activities, path: .constant(PathStore().path))
+}

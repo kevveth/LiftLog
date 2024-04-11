@@ -23,7 +23,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(for: Activity.self) { activity in
-                DetailView(activity: activity, sharedActivities: sharedActivities)
+                DetailView(activity: activity, sharedActivities: sharedActivities, path: $pathStore.path)
             }
             .navigationTitle("LiftLog 🪵")
             .toolbar {
